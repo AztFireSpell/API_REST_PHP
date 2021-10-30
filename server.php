@@ -88,6 +88,15 @@ switch(strtoupper($_SERVER['REQUEST_METHOD'])){
         }
         break;
     case 'DELETE':
+        //Validamos que el recurso exista
+        if(!empty($resourceId) && array_key_exists($resourceId, $books)){  
+
+            //Lo eliminamos del arreglo
+            unset($books[$resourceId]);
+
+        }   
+        
+        echo json_encode($books);
         break;
 
 } 
