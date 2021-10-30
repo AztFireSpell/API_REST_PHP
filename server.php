@@ -56,14 +56,36 @@ switch(strtoupper($_SERVER['REQUEST_METHOD'])){
        }
         break;
     case 'POST':
+        //Tomamos la entrada cruda de php, porque no tenemos un formulario
         $json = file_get_contents('php://input');
-
+        //Transformamos el json obtenido en un nuevo elemento del array
         $books[] = json_decode($json, true);
 
+        //Emitimos la ultima entrada del aaray
         //echo array_keys($books)[count($books) - 1];
+
+        //Mostramos todos el arreglo de books
         echo json_encode($books);
         break;
     case 'PUT':
+
+        /*Importante: 
+            Para put no se puede modificar un campo especifico
+            Toda la informacion debe ser enviada con todos los campos
+            Ya que reemplaza la informacion lineal
+        */
+
+        //Validamos que el recurso buscado exista
+        if(!empty($resourceId) && array_key_exists($resourceId, $books)){
+            //tomamos la entrada cruda
+            $json = file_get_contents('php://input');
+
+            //Pasamos el resourceId para ver cual recurso sera reemplazado
+            $books[ $resourceId ] = json_decode($json, true);
+
+            //Devolvemos la coleccion modificada
+            echo json_encode($books);
+        }
         break;
     case 'DELETE':
         break;
