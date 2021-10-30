@@ -1,5 +1,16 @@
 <?php
 
+//Buscamos si hay un usuario authenticado en el server
+$user = array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : '';
+$pwd = array_key_exists('PHP_AUTH_PW', $_SERVER) ? $_SERVER['PHP_AUTH_PW'] : '';
+
+//Hacemos una validacion sencilla pero para nada recomendada
+
+if ($user !== 'alonso' || $pwd !== '1234'){
+
+    die;
+}
+
 // Definimos los recursos disponibles
 $allowedResourceTypes = [
     'books',

@@ -41,3 +41,13 @@ DELETE
 
 curl -X "DELETE" http://localhost:8000/books/1
 
+Cuando agregamos una authenticacion de forma sencilla (se debe usar una base de datos, pero esta vez se usara esta forma sencilla pero no recomendada)
+
+Dentro del codigo de php tenemos que estan seteados las credenciales
+
+Entonces despues si solo hacemos un get sencillo este no mostrara nada, sin embargo, le pasamos los datos de claves, en esta ocacion de forma sencilla tendremos que hacer la consulta asi
+
+curl http://alonso:1234@localhost:8000/books
+
+Sin embargo la autenticacion http es totalmente insegura, e ineficiente porque en cada pedido se debe realizar la autenticacion
+
