@@ -1,16 +1,32 @@
 <?php
 
-//Buscamos si hay un usuario authenticado en el server
-$user = array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : '';
-$pwd = array_key_exists('PHP_AUTH_PW', $_SERVER) ? $_SERVER['PHP_AUTH_PW'] : '';
-
-//Hacemos una validacion sencilla pero para nada recomendada
-
-if ($user !== 'alonso' || $pwd !== '1234'){
-
+if(!array_key_exists('HTTP_X_TOKEN', $_SERVER)){
     die;
 }
 
+$url = 'http://localhost:8001';
+
+$ch = curl_init( $url);
+
+curl_setopt(
+    $ch,
+    CURLOPT_HTTPHEADER,
+    [
+        "X-Token: {$_SERVER['HTTP_X_TOKEN']}"
+    ]
+    );
+
+curl_setopt(
+    $ch,
+    CURLOPT_RETURNTRANSFER,
+    true
+);
+
+$ret = curl_exec( $ch );
+
+if($ret !== 'true') {
+    die;
+}
 // Definimos los recursos disponibles
 $allowedResourceTypes = [
     'books',

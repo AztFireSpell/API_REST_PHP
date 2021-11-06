@@ -51,3 +51,26 @@ curl http://alonso:1234@localhost:8000/books
 
 Sin embargo la autenticacion http es totalmente insegura, e ineficiente porque en cada pedido se debe realizar la autenticacion
 
+//Buscamos si hay un usuario authenticado en el server
+$user = array_key_exists('PHP_AUTH_USER', $_SERVER) ? $_SERVER['PHP_AUTH_USER'] : '';
+$pwd = array_key_exists('PHP_AUTH_PW', $_SERVER) ? $_SERVER['PHP_AUTH_PW'] : '';
+
+//Hacemos una validacion sencilla pero para nada recomendada
+
+if ($user !== 'alonso' || $pwd !== '1234'){
+
+    die;
+}
+
+Autenticacion con HMAC informacion muy segura, pero no tan confiable
+
+Para esta autenticacion usamos 3 elementos importantes, un hash, una marca de tiempo y un id de usuario
+
+La consulta para CMD windows:
+curl http://localhost:8000/books -H "X-HASH: c63b400cb45cbf93e4da1ce4b300a3789ba53672" -H "X-UID: 1" -H "X-TIMESTAMP: 1635635550"
+
+¿De donde saque los datos?
+
+De la consulta con generate_hash.php en donde debemos correrlo de la siguiente forma: 
+
+php generate_hash.php 1
