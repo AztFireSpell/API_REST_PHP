@@ -74,3 +74,27 @@ curl http://localhost:8000/books -H "X-HASH: c63b400cb45cbf93e4da1ce4b300a3789ba
 De la consulta con generate_hash.php en donde debemos correrlo de la siguiente forma: 
 
 php generate_hash.php 1
+
+Tokens!
+
+Tenemos que habilitar el servidor de autenticacion
+
+php -S localhost:8001 auth_server.php
+
+tenemos que hacer una peticion post :
+
+curl http://localhost:8001 -X "POST" -H "X-CLient-Id: 1" -H "X-Secret:SuperSecreto!"
+
+informacion dentro de auth_server.php linea 17
+
+Para poder hacer una peticion al servidor de recuros debemos de incluir el token generado
+
+curl http://localhost:8000/books -H "X-Token:5d0937455b6744.68357201"
+
+
+Manejo de errores--
+
+Con el manejo de errores dentro de client.php se debe de quitar la parte de autenticacion con tokens dentro del server.php, ya que al hacer comunicacion con el servidor este mandara siempre un 200, aunque no nos devuelva nada, ya que en las primeras lineas se nos muestra un die, con el que php siempre interpreta una correcion valida
+
+De esta forma ya se pueden enviar los errores correctamente a la consola
+
