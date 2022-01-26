@@ -98,3 +98,14 @@ Con el manejo de errores dentro de client.php se debe de quitar la parte de aute
 
 De esta forma ya se pueden enviar los errores correctamente a la consola
 
+Creacion de nuestro apirest comunicacion con un frontend html
+
+Creamo un archivo index.html, es importante ajustar ahora dentro de router una serie de comprobaciones con la url del sitio para que, una vez levantado de nuevo el servidor php, este muestre en el navegador la interfaz html
+
+# Iniciamos nuestro servidor con php -S localhost:8000 router.php 
+
+Sin tener activada la parte de la autenticacion de datos, como tokens, usuarios, etc.
+
+Una vez hecho eso dentro de html tenemos que usar ajax, para realizar las peticiones y solicitudes dentro de nuestro servidor, tales como GET (opcion por defecto de ajax en method) y POST (para agregar un libro, aunque bien sabemos que no se guardaran mas que en el DOM existente de la peticion activa)
+
+Informacion dentro del index.html
